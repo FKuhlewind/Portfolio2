@@ -6,7 +6,7 @@ These are the files for my second and final portfolio.
 <ul>
   <li>index.html</li>
   
-  <li>Elements
+  <li>elements
     <ul>
       <li>
         <a href="https://github.com/FKuhlewind/Portfolio2/blob/gh-pages/elements/visitors-book.html"          target="_blank">port-folio</a>
@@ -19,7 +19,11 @@ These are the files for my second and final portfolio.
               <li>show-picture</li>
             </ul>
           </li>
-          <li>askme-info</li>
+          <li>askme-info
+            <ul>
+              <li>core-collapse</li>
+            </ul>
+          </li>
           <li>text-analysis</li>
           <li>textanalysis-info</li>
           <li>universal-tagmachine</li>
