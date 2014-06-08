@@ -8,7 +8,8 @@ These are the files for my second and final portfolio.
   
   <li>Elements
     <ul>
-      <li><a href="https://github.com/FKuhlewind/Portfolio2/blob/gh-pages/elements/visitors-book.html" target="_blank">port-folio</a>
+      <li>
+        <a href="https://github.com/FKuhlewind/Portfolio2/blob/gh-pages/elements/visitors-book.html"          target="_blank">&ltport-folio></a>
         <ul>
           <li>portfolio-intro</li>
           <li>coding-element</li>
