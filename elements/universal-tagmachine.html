@@ -98,6 +98,8 @@ Polymer('universal-tagmachine', {
       buttonClick: function () {
         if (this.imageMessage == 2) {
           this.writeToFirebase();
+          this.$.tag.value="";                  
+          this.$.url.value="";
           }
         else if (this.imageMessage == 1) {
           this.imageMessage = 4;
