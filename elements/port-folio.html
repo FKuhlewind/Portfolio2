@@ -14,10 +14,11 @@
   <link rel="import" href="universal-tagmachine.html"/>
   <link rel="import" href="tagmachine-info.html"/>
 
-  <link rel="import" href="point-element.html"/>
   <link rel="import" href="portfolio-end.html"/>
-
   <link rel="import" href="visitors-book.html"/>
+
+  <link rel="import" href="point-element.html"/>
+  <link rel="import" href="point-link.html"/>
 
 <polymer-element name="port-folio">
 
@@ -117,7 +118,11 @@
 
           <point-element style="left: 40%; top: 6650px" position="6650" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
 
-      <visitors-book style="position: absolute; left: 5%; top: 6700px"></portfolio-end>
+      <visitors-book style="position: absolute; left: 5%; top: 6700px"></visitors-book>
+
+          <point-element style="left: 40%; top: 6860px" position="6670" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+
+      <point-link style="left: 39.3%; top: 6920px" position="6670" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-link>
 
   </div>
 

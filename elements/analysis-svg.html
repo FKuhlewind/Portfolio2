@@ -4,19 +4,40 @@
 
 <template>
 
+  <style type="text/css">
+     button { 
+      position: absolute;
+      bottom: 45px;
+      right: 15px;
+      font-family: "Trebuchet MS", sans-serif;
+      color: white;
+      border-radius: 1px; 
+      font-size: 16px; 
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.2); }
+    button:hover { 
+      border: 2px solid gray;
+      cursor: pointer;
+      cursor: hand; }
+  </style>
+
   <svg width="500" height="400" xmlns="http://www.w3.org/2000/svg">
     <rect id="svg_1" height="400" width="500" y="0" x="0" fill="rgba(0,0,0,0.1)"/>
     <g class="bars">
       <template repeat="{{data in graphData}}">
-        <rect height="30" width="{{data.width}}" y="{{data.yPos}}" x="{{data.xPos}}" fill="{{data.color}}"/>
+        <rect style="display: {{basic}}" height="30" width="{{data.width}}" y="{{data.yPos}}" x="{{data.xPos}}" fill="{{data.color}}"/>
+        <circle style="display: {{experimental}}" cx="{{data.circleX}}" cy="{{data.circleY}}" r="{{data.circleRad}}" fill="{{data.circleCol}}" />
       </template>
     </g>
     <g class="text">
       <template repeat="{{data in graphData}}">
-        <text text-anchor="middle" font-family="'Trebuchet MS'" font-size="16" y="{{data.textPos}}" x="250" fill="#ffffff">{{data.text}} ({{data.score}})</text>
+        <<text style="display: {{basic}}" text-anchor="middle" font-family="'Trebuchet MS'" font-size="16" y="{{data.textPos}}" x="250" fill="#ffffff">{{data.text}} ({{data.score}})</text>
+        <text style="display: {{experimental}}" text-anchor="middle" font-family="'Trebuchet MS'" font-size="12" y="{{data.circleY}}" x="{{data.circleX}}" fill="#ffffff">{{data.text}} ({{data.score}})</text>
       </template>
     </g>
   </svg>
+
+  <button on-click="{{buttonClick}}">Toggle</button>
 
 </template>
 
@@ -26,6 +47,16 @@ Polymer('analysis-svg', {
       svgData: [],
       graphData: [],
       temp: [],
+      basic: "inline",
+      experimental: "none",
+      buttonClick: function () {
+        if (this.basic == "inline")
+           { this.basic = "none";
+             this.experimental = "inline"; }
+        else
+          { this.basic = "inline";
+            this.experimental = "none"; };
+      },
       svgDataChanged: function () {
         for (var i = 0; i < 10; i++) {
             this.temp[i] = this.svgData[i].relevance;
@@ -37,9 +68,11 @@ Polymer('analysis-svg', {
             this.width = ( 400 / this.diff * this.svgData[i].relevance ) + ( 50 - (400 / this.diff * this.mini) );
             this.temp2 = Math.round(this.svgData[i].sentimScore*10)/10; 
             if ( this.temp2 < 0)
-               {this.color = "rgba("+Math.round(Math.abs(85*this.svgData[i].sentimScore+170))+", 0, 0, 0.8)"}
+               {this.color = "rgba("+Math.round(Math.abs(85*this.svgData[i].sentimScore+170))+", 0, 0, 0.8)";
+                this.circleCol = "rgba("+Math.round(Math.abs(85*this.svgData[i].sentimScore+170))+", 0, 0, 0.3)"}
             else if ( this.temp2 > 0)
-              {this.color = "rgba(0,"+Math.round(Math.abs(85*this.svgData[i].sentimScore+170))+", 0, 0.8)"}
+              {this.color = "rgba(0,"+Math.round(Math.abs(85*this.svgData[i].sentimScore+170))+", 0, 0.8)";
+                this.circleCol = "rgba(0,"+Math.round(Math.abs(85*this.svgData[i].sentimScore+170))+", 0, 0.3)"}
             else
               {this.color = "rgba(0,0,0,0.2)"};
             this.graphData[i]= { text: this.svgData[i].text ,
@@ -48,7 +81,11 @@ Polymer('analysis-svg', {
                             yPos: ( ( i * 40 ) + 5 ),  
                             textPos: ( ( i * 40 ) + 27 ),
                             color: this.color, 
-                            score: Math.round(this.svgData[i].sentimScore*10)/10 };
+                            score: Math.round(this.svgData[i].sentimScore*10)/10,
+                            circleCol: this.circleCol,
+                            circleRad: this.width / 2,
+                            circleX: this.width,
+                            circleY: Math.round(this.svgData[i].sentimScore*10)/10*400 + 200 + (i*15) };
             };
         },
 });
