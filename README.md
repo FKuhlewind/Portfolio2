@@ -1,7 +1,7 @@
 Portfolio #2
 =============
 
-These are the files for my second and final portfolio.
+These are the files for my second and final portfolio:
 
 <ul>
   <li>index.html</li>
@@ -51,19 +51,11 @@ These are the files for my second and final portfolio.
           </li>
           <li>point-element</li>
           <li>point-link</li>
-          
         </ul>
       </li>
-  
     </ul>
   </li>
-
 </ul>
+Florian Kuhlewind, June 2014
 
 
-
-  <link rel="import" href="portfolio-end.html"/>
-  <link rel="import" href="visitors-book.html"/>
-
-  <link rel="import" href="point-element.html"/>
-  <link rel="import" href="point-link.html"/>
