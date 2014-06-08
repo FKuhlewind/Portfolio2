@@ -1,31 +1,25 @@
 <!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
+    <title>Florian</title>
 
-  <title>Florian</title>
-
-  	<!-- 1. Load platform support before any code that touches the DOM. -->
     <script src="bower_components/platform/platform.js"></script>
-    <!--<link rel="import" href="../bower_components/polymer-ajax/polymer-ajax.html">-->
-    <!-- 2. Load the component using an HTML Import -->
-    <link rel="import" href="elements/flo-element.html"/>
-    <link rel="import" href="elements/jquery-element.html"/>
-    <link rel="import" href="elements/flexible-div.html"/>
-    <link rel="import" href="elements/ask-me.html"/>
-    <link rel="import" href="elements/spoiler-alert.html"/>
+    <script src="./plugs/jquery.js"></script>
+    <link rel="import" href="elements/port-folio.html"/>
 
+    <script>
+      $(window).on('beforeunload', function() {
+        $(window).scrollTop(0);
+      });
+    </script>
 
-  <script src="./plugs/jquery.js"></script>
-  <!--<script src="app.js"></script>-->
-
+  <style type="text/css">
+      body {margin: 0px;}
+  </style>
 </head>
+
 <body>
-
-<!--<flexible-div></flexible-div>
-<jquery-element></jquery-element>-->
-
-<ask-me></ask-me>
-
-
+  <port-folio class="main"></port-folio>
 </body>
 </html>

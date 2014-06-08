@@ -1,0 +1,86 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+  <link rel="import" href="core-collapse.html"/>
+
+<polymer-element name="textanalysis-info">
+
+<template>
+
+	<style type="text/css">
+      p {
+        margin: 10px 0 10px 0;
+        font-size: 18px; }
+      h1 { 
+        margin: 10px 0 10px 0;
+        font-size: 22px; }
+      :host {
+        width: 720px; 
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.1); 
+        font-family: "Trebuchet MS", sans-serif;
+        color: white;
+        border-radius: 1px;
+        font-size: 18px }
+      .top {
+        font-size: 30px; }
+      button { 
+        float: right;
+        color: white;
+        border-radius: 1px; 
+        font-size: 16px; 
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        background: rgba(0, 0, 0, 0.2); }
+      button:hover { 
+        border: 2px solid gray;
+        cursor: pointer;
+        cursor: hand; }
+      a { 
+        color: #E6C84E;
+        font-size: 18px;
+        text-decoration: none;
+        font-weight: bold; }
+	</style>
+
+<div class="main">
+
+  <div class="top">
+    <button on-click="{{toggleInfo}}">{{button}}</button>
+    &lttext-analysis>
+  </div>
+
+  <div class="theory">
+    <core-collapse id="collapseTheory" opened="true" duration="1">
+      <h1>Theory</h1>
+      <p>Utilizing the <a href="" target="_blank">Alchemy API</a>, this component displays extracted keywords along with their calculated relevance and sentiment graphically. It demonstrates how linguistic research in the field of language technology can be used in a powerful way.</p> 
+      <p>With this technique we do not need to rely anymore on which keyword authors choose for their texts, enabling us to search for texts based on automatic keyword extraction. Based on data derived from such text (and also along with the possibilities of visualization) we could look for correlations between texts and we could find texts which otherwise we might not have come across. To enhance such procedures, human feedback on its performance might be vital and one should take this approach with great care. We should not allow arbitrary algorithms decide which texts to look at but rather use the above in order to widen our textual horizon.</p>
+      <p>I picture a tool that visualizes large number of texts (possibly adding some randomness to the algorithm) in order to allow a completely new approach to their analysis. The design should be experimental and allow for flexible display and connection of parameters. Although I do not agree that large amounts of data make models redundant, I believe that tools like the one described can help us to gain new insights.</p>
+    </core-collapse>
+  </div>
+
+  <div class="coding">
+    <core-collapse id="collapseCoding" opened="false" duration="1">
+      <h1>Coding</h1>
+      <p>The original plan was make an AJAX call to the <a href="" target="_blank">Alchemy API</a> which would have allowed the user to enter text and/or URLs herself and have the texts' keywords visualized. Although my POST request via Google Postman were successful, it did not work in my tool. I have learned a lot about response headers in this process but could still not fix the issue myself. I then decided to mock the AJAX call and created the component <a href="" target="_blank">&lttext-data></a> which returns the data of a certain text (which I have retrieved via Postman) based on a value passed to that component.</p> 
+      <p>Another component, <a href="" target="_blank">&ltanalysis-svg></a>, takes the data and visualizes it. I deliberately did not make use of d3 here as I wanted to explore the possibilities of Polymer's template-repeat in order to dynamically create an SVG based on changing data. One could easily create components that take date and display them based on user input. I originally planned to make use of <a href="" target="_blank">Web Animations</a> to animate from one state to another, but realized that I need more time than I had in order to use them properly.</p>
+      <p>From building this component I have learned how the combination of three rather simple components can create a powerful and flexible tool.   </p>
+    </core-collapse>
+  </div>
+
+</div>
+
+</template>	
+
+<script>
+Polymer('textanalysis-info', {  
+		button: "Coding",
+     	toggleInfo: function () {
+     		   this.$.collapseTheory.toggle();
+           this.$.collapseCoding.toggle();
+           if (this.button == "Coding")
+              {this.button = "Theory"}
+           else {this.button = "Coding"};
+     		},
+});
+</script>
+
+</polymer-element>

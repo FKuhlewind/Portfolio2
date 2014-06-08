@@ -1,0 +1,81 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+  <script src="../plugs/d3.js"></script>
+  <script src="../plugs/d3.layout.cloud.js"></script>
+
+<polymer-element name="d3-cloud" attributes="cloudData check">
+
+  <template>
+    <span id="wordCloud"></span>
+  </template>
+
+<script>
+    (function(){
+      var fill = d3.scale.category20();
+      var cloudLayout = d3.layout.cloud().size([400, 400]);
+
+      Polymer('d3-cloud', {
+        cloudData:{},
+        cloudDataChanged: function() {
+          tagName = [];
+          tagNumb = [];
+          for (var i = 0; i < this.cloudData.length; i++) { 
+              tagName[i] = Object.keys(this.cloudData[i]);       //store name of tags in array tagName
+              tagNumb[i] = this.cloudData[i][tagName[i]].length; //store how many pics are under tag in array tagNumb
+              };
+          this.createCloud();
+        },
+        createCloud: function() {
+          var myNode = this.$.wordCloud;
+          while (myNode.firstChild) {
+            myNode.removeChild(myNode.firstChild);
+            };
+          var that = this;
+          function draw(words) {
+            d3.select(that.$.wordCloud).append("svg")
+                .attr("width", 400)
+                .attr("height", 400)
+                .style("background-color", "rgba(0, 0, 0, 0.1)")
+                .attr("id", "mySVG")
+              .append("g")
+                .attr("transform", "translate(200,200)")
+              .selectAll("text")
+                .data(words)
+              .enter().append("text")
+                .style("font-size", function(d) { return d.size + "px"; })
+                .style("font-family", "Impact")
+                .style("fill", function(d, i) { return fill(i); })
+                .attr("id", function(d){ return d.text; })
+                .attr("class", "tag")
+                .attr("on-click", "{{doSomething}}")
+                .attr("text-anchor", "middle")
+                .attr("transform", function(d) {
+                  return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                })
+                .text(function(d) { return d.text; });
+          }      
+          d3.layout.cloud().size([400, 400])
+            .words(d3.zip(tagName, tagNumb).map(function(d) {
+              return {text: d[0], size: d[1]*15}; // this number may have to be changed according to total number of tag values....
+            }))
+            .padding(5)
+            .rotate(function() { return ~~(Math.random() * 2) * 90; })
+            .font("Impact")
+            .fontSize(function(d) { return d.size; 
+              console.log(this.d.size);
+            })
+            .on("end", draw)
+            .start();   
+        },
+        checkChanged: function() {
+          this.cloudDataChanged();
+          this.check = 0;
+        }
+      });
+    })();
+</script>
+
+</polymer-element>
+
+
+

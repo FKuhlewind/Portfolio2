@@ -1,0 +1,139 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+  <link rel="import" href="../bower_components/core-firebase/core-firebase.html">
+
+<polymer-element name="visitors-book">
+
+<template>
+
+	<style type="text/css">
+      :host {
+        width: 840px; 
+        height: 100px;
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.1); 
+        font-family: "Trebuchet MS", sans-serif;
+        color: white;
+        border-radius: 1px;
+        font-size: 16px }
+      .header { 
+        font-size: 24px; 
+        margin-bottom: 10px }
+      .history {
+        height: 50px;
+        width: 500px;
+        float: right;
+        background-color: rgba(0, 0, 0, 0.1);
+        font-size: 18px;
+        text-align: center;
+        padding: 5px; }
+      img {
+        float: right;
+        border-radius: 20px }
+      img:hover {
+        background-color: rgba(0, 0, 0, 0.3); 
+        cursor: pointer;
+        cursor: hand; }
+      input { 
+        border: 2px solid rgba(0, 0, 0, 0); 
+        border-radius: 1px;
+        background: rgba(0, 0, 0, 0.1); 
+        color: white;
+        font-family: "Trebuchet MS", sans-serif; 
+        font-size: 14px; }
+      textarea:focus, input:focus{
+        outline: 0; }
+      button { 
+        color: white;
+        width: 80px;
+        margin-left: 35px;
+        border-radius: 1px; 
+        font-size: 16px; 
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        background: rgba(0, 0, 0, 0.2); }
+      button:hover { 
+        border: 2px solid gray;
+        cursor: pointer;
+        cursor: hand; }
+      .comment {
+        font-style: italic; }
+      .name {
+        margin-top: 5px;
+        font-size: 14px;
+        text-align: right;
+        margin-right: 5px; }
+	</style>
+
+<div class="main">
+  <core-firebase  location="https://visitors-book.firebaseio.com/" 
+            list="{{guestData}}"  
+            id="firebase">
+  </core-firebase>
+
+  <div>
+      <img style="height: 32px; width: 32px" src="git.svg"/>
+      <div class="header">
+        &ltvisitors-book>
+      </div>   
+  </div>
+
+  <div class="history">
+        <div class="comment">{{commentOf}}</div>
+        <div class="name">{{nameOf}}</div>
+  </div>
+
+  <div id="comment">
+      <label for="comment">Comment: </label>
+      <input style="width: 240px; margin-bottom: 8px" autocomplete="off" id="comment" type="text" maxlength="50"></input>
+  </div>
+  <div id="name">
+      <label for="name">Name: </label>
+      <input style="width: 120px; margin-left: 29px" autocomplete="off" id="name" type="text" maxlength="30"></input>
+      <button on-click="{{buttonClick}}">Submit</button>
+  </div>
+
+</div>
+
+</template>	
+
+<script>
+Polymer('visitors-book', {  
+    commentOf: "Please leave me a comment ;)",
+    nameOf: "Florian",
+    which: 0,
+    buttonClick: function () {
+            var currentdate = new Date();
+            if (currentdate.getMinutes() < 10) 
+              { add = "0" } else { add = "" };
+            datetime = " - " + currentdate.getDate() + "."
+              + (currentdate.getMonth()+1)  + "." 
+              + currentdate.getFullYear() + ", "  
+              + currentdate.getHours() + ":" + add 
+              + currentdate.getMinutes() + "h";
+            this.newObj = {};
+            this.newObj["message"] = this.$.comment.value;
+            this.newObj["name"] = (this.$.name.value + datetime);
+            this.guestData[0].push(this.newObj);
+            this.$.firebase.set(this.guestData);
+            this.$.name.value = "";
+            this.$.comment.value = "";
+            that.commentOf = that.guestData[0][this.amount].message;
+            that.nameOf = that.guestData[0][this.amount].name;
+            this.amount = this.amount + 1;
+            },
+    guestDataChanged: function () {
+           this.amount = this.guestData[0].length;
+           that = this;
+           setInterval(function() {
+              that.which = that.which + 1;
+              if (that.which >= that.amount) {
+                that.which = that.which - that.amount;
+                };
+              that.commentOf = that.guestData[0][that.which].message;
+              that.nameOf = that.guestData[0][that.which].name;
+            }, 7000);
+     		},
+});
+</script>
+
+</polymer-element>

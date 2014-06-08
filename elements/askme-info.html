@@ -1,0 +1,87 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+  <link rel="import" href="core-collapse.html"/>
+
+<polymer-element name="askme-info">
+
+<template>
+
+	<style type="text/css">
+      p {
+        margin: 10px 0 10px 0;
+        font-size: 18px; }
+      h1 { 
+        margin: 10px 0 10px 0;
+        font-size: 22px; }
+      :host {
+        width: 680px; 
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.1); 
+        font-family: "Trebuchet MS", sans-serif;
+        color: white;
+        border-radius: 1px;
+        font-size: 18px }
+      .top {
+        font-size: 30px; }
+      button { 
+        float: right;
+        color: white;
+        border-radius: 1px; 
+        font-size: 16px; 
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        background: rgba(0, 0, 0, 0.2); }
+      button:hover { 
+        border: 2px solid gray;
+        cursor: pointer;
+        cursor: hand; }
+      a { 
+        color: #855555;
+        font-size: 18px;
+        text-decoration: none;
+        font-weight: bold; }
+	</style>
+
+<div class="main">
+
+  <div class="top">
+    <button on-click="{{toggleInfo}}">{{button}}</button>
+    &ltask-florian>
+  </div>
+
+  <div class="theory">
+    <core-collapse id="collapseTheory" opened="true" duration="1">
+      <h1>Theory</h1>
+      <p>While the above application itself may not very useful and more like a source of entertainment, it can be seen as representative for some of the coding possibilities from which the humanities could benefit.</p> 
+      <p>The <a href="" target="_blank">Jeannie API</a> makes use of various resources to answer questions it is prompted with. One could imagine an application that does something similar, but focuses on and deals with questions raised in the humanities without excluding knowledge available through other channels.</p>
+      <p>I imagine a tool which draws information from various sources, bundles and renders them appropriately for query. Here, not the source of information would be of main importance but the relevance of the information with respect to the query.</p>
+    </core-collapse>
+  </div>
+
+  <div class="coding">
+    <core-collapse id="collapseCoding" opened="false" duration="1">
+      <h1>Coding</h1>
+      <p>The component enables the user to ask Florian a question and returns a response along with (and if available from the API response) a picture.</p> 
+      <p>It contains two components, the <a href="" target="_blank">&ltpolymer-ajax></a> for making the AJAX call and <a href="" target="_blank">&ltshow-picture></a>, which is simple element I created to display the picture in case it is part of the API response.</p>
+      <p>It is my first interactive component and through it I got acquainted with Polymers two-way data binding possibilities, passing information between components and last but not least the advantages of neatly keeping styling, code and behaviour seperate from the main page and the other components.</p>
+    </core-collapse>
+  </div>
+
+</div>
+
+</template>	
+
+<script>
+
+Polymer('askme-info', {  
+		button: "Coding",
+     	toggleInfo: function () {
+     		   this.$.collapseTheory.toggle();
+           this.$.collapseCoding.toggle();
+           if (this.button == "Coding")
+              {this.button = "Theory"}
+           else {this.button = "Coding"};
+     		},
+});
+</script>
+
+</polymer-element>

@@ -1,0 +1,175 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+  <link rel="import" href="../bower_components/core-firebase/core-firebase.html">
+  <link rel="import" href="d3-cloud.html"/>
+  <link rel="import" href="picture-display.html"/>
+
+<polymer-element name="universal-tagmachine">
+
+<template>
+
+  <style type="text/css">
+    div {
+      font-family: "Trebuchet MS", sans-serif;
+      color: white; font-size: 16px }
+    .main {
+      width: 815px; 
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.1); }
+    img {
+      float: right; 
+      border-radius: 20px }
+    img:hover {
+      background-color: rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      cursor: hand; }
+    .header { 
+      font-size: 30px; 
+      margin-bottom: 10px }
+    select, option, textarea, input { 
+      width: 500px;
+      border: 2px solid rgba(0, 0, 0, 0); 
+      border-radius: 1px;
+      background: rgba(0, 0, 0, 0.1); 
+      color: white;
+      font-family: "Trebuchet MS", sans-serif; 
+      font-size: 14px; }
+    textarea:focus, input:focus{
+      outline: 0; }
+    button { 
+      width: 250px;
+      color: white;
+      border-radius: 1px; 
+      font-size: 16px; 
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.2); }
+    button:hover { 
+      border: 2px solid gray;
+      cursor: pointer;
+      cursor: hand; }
+    #inputSection {
+      margin-top: 10px;}
+    #tag {
+      width: 100px; }
+    #url {
+      width: 360px; }
+    #urlInput {
+      float:right; }
+    #tagInput {
+      float:right; 
+      margin-right: 15px}
+  </style>
+
+<div class="main">
+
+  <img src="git.svg"/>
+
+  <div class="header">
+      &ltuniversal-tagmachine>
+  </div>
+
+  <d3-cloud cloudData="{{cloudData}}" check="{{check}}"></d3-cloud>
+
+  <picture-display imageMessage="{{imageMessage}}" imageData="{{imageData}}" tagN="{{tagN}}"></picture-display>
+
+  <core-firebase  location="https://tag-machine.firebaseio.com/" 
+            list="{{tagData}}"  
+            id="firebase">
+  </core-firebase>
+  
+  <div id="inputSection">
+    <button on-click="{{buttonClick}}">{{button}}</button>
+    <div id="urlInput">
+      <label for="url">URL: </label><input autocomplete="off" on-focus="{{checkContent}}" on-blur="{{checkContent}}" on-keyup="{{checkContent}}" id="url" type="text"></input>
+    </div>
+    <div id="tagInput">
+      <label for="tag">Tag: </label><input autocomplete="off" on-focus="{{checkContent}}" on-blur="{{checkContent}}" on-keyup="{{checkContent}}" id="tag" type="text"></input>
+    </div>
+  </div>
+
+</div>
+
+</template>
+
+<script>
+Polymer('universal-tagmachine', {
+      button: "Enter Something >",
+      imageMessage: 0,
+      buttonClick: function () {
+        if (this.imageMessage == 2) {
+          this.writeToFirebase();
+          }
+        else if (this.imageMessage == 1) {
+          this.imageMessage = 4;
+          this.tagN = this.$.tag.value;
+          this.imageData = this.tagData;
+          };
+      },
+      checkContent: function () {
+        this.tag = this.$.tag.value;                  
+        this.url = this.$.url.value;
+        if (this.tag == "" && this.url == "") {
+            this.imageMessage = 0;
+            this.imageData = this.url;
+            this.button = "Enter Something >";
+            };
+        if (this.tag != "" && this.url == "") {
+            this.imageMessage = 1;
+            this.imageData = this.url;
+            this.button = "Display tagged Images";
+            };
+        if (this.tag != "" && this.url != "") {
+            this.imageMessage = 2;
+            this.imageData = this.url;
+            this.button = "Save Data";
+            };
+        if (this.tag == "" && this.url != "") {
+            this.imageMessage = 3;
+            this.imageData = this.url;
+            this.button = "Enter desired Tagname >";
+            };
+      },
+      writeToFirebase: function () {
+        this.numb = Object.keys(this.tagData).length; // get the amount of tags stored already
+        this.tag = this.$.tag.value;                  // get values entered into inout fields
+        this.url = this.$.url.value;
+        this.check = 0;
+        this.tagPos = undefined;
+        this.itemNumb = 0;
+        for (var i = 0; i < this.numb; i++) {         // iterate over the tags that are there already...
+            for(var k in this.tagData[i]) {
+                if (k == this.tag) {
+                  this.check = this.check + 1;        // ... and íf the tag exists already store which and where.
+                  var array = this.tagData[i][k];
+                  this.itemNumb = array.length;
+                  this.tagPos = i;
+                  this.tName = k;
+                  };
+                };
+            };
+        if (this.check > 0) {
+          this.tagData[this.tagPos][this.tName].push(this.url);
+          this.$.firebase.set(this.tagData);
+          this.tagDataChanged();
+          } 
+        else {
+          this.newObj = {};
+          this.newArr = [this.url];
+          this.newObj[this.tag] = this.newArr;
+          this.tagData.push(this.newObj);
+          this.$.firebase.set(this.tagData);
+          this.tagDataChanged();
+          }; 
+        },
+      tagDataChanged: function () {
+        var that = this;
+        setTimeout(function() {
+          that.cloudData = that.tagData;
+          }, 2000);  
+        },
+      ready: function() {   
+        },
+});
+</script>
+
+</polymer-element>

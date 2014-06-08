@@ -1,0 +1,190 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+  <script src="../plugs/jquery.js"></script>
+
+  <link rel="import" href="portfolio-intro.html"/>
+  <link rel="import" href="coding-element.html"/>
+
+  <link rel="import" href="ask-me.html"/>
+  <link rel="import" href="askme-info.html"/>
+
+  <link rel="import" href="text-analysis.html"/>
+  <link rel="import" href="textanalysis-info.html"/>
+
+  <link rel="import" href="universal-tagmachine.html"/>
+  <link rel="import" href="tagmachine-info.html"/>
+
+  <link rel="import" href="point-element.html"/>
+  <link rel="import" href="portfolio-end.html"/>
+
+  <link rel="import" href="visitors-book.html"/>
+
+<polymer-element name="port-folio">
+
+<template>  
+
+<style type="text/css">
+  .navInd {
+    text-align: center;
+    display: inline-block;
+    line-height: 80px; 
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 30px;
+    color: white; 
+    position: absolute;
+    cursor: pointer; 
+    cursor: hand; }
+  .navPointer {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 20px;
+    border-radius: 1px; }
+</style>
+
+  <div class="navBar" style="background: linear-gradient(to right,{{col1}},{{col1}},{{col2}},{{col3}},{{col4}},{{col5}},{{col5}});
+      width: 100%; height: 80px; position: fixed; display: table-cell; z-index: 5; ">
+      <div class="navPointer" style="left: {{navPointPos}}px"></div>
+      <div on-click="{{scroll0}}" class="navInd" style="left: {{navSpacing0}}px">></div>
+      <div on-click="{{scroll1}}" class="navInd" style="left: {{navSpacing1}}px">1</div>
+      <div on-click="{{scroll2}}" class="navInd" style="left: {{navSpacing2}}px">2</div>
+      <div on-click="{{scroll3}}" class="navInd" style="left: {{navSpacing3}}px">3</div>
+      <div on-click="{{scroll4}}" class="navInd" style="left: {{navSpacing4}}px"><</div>    
+  </div> 
+
+  <div class="mainSurface" style="background: linear-gradient({{col1}},{{col2}},{{col3}},{{col4}},{{col5}},{{col5}});
+                                  width: 100%; position: absolute; top: 80px; height: 7000px;">
+
+      <portfolio-intro style="position: absolute; left: 31%; top: 100px"></portfolio-intro>
+
+          <point-element style="left: 49%; top: 590px" position="590" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 49%; top: 660px" position="660" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 49%; top: 730px" position="730" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 49%; top: 800px" position="800" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 49%; top: 870px" position="870" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 49%; top: 940px" position="940" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 49%; top: 1010px" position="1010" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+
+                <coding-element style="left: 42%; top: 1100px" position="1100" scroll="{{scrollPosition}}" height="{{windowHeight}}"></coding-element>
+
+          <point-element style="left: 49%; top: 1215px" position="1215" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 49%; top: 1285px" position="1285" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 49%; top: 1355px" position="1355" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 49%; top: 1425px" position="1425" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 49%; top: 1495px" position="1495" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 49%; top: 1565px" position="1565" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+
+      <ask-me style="position: absolute; left: 32%; top: 1650px"></ask-me>
+
+          <point-element style="left: 42%; top: 2070px" position="2070" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 42%; top: 2140px" position="2140" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 42%; top: 2210px" position="2210" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 42%; top: 2280px" position="2280" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+
+                <askme-info style="position: absolute; left: 30%; top: 2350px"></askme-info>
+
+          <point-element style="left: 50%; top: 2800px" position="2800" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 50%; top: 2870px" position="2870" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 50%; top: 2940px" position="2940" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 50%; top: 3010px" position="3010" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+
+      <text-analysis style="position: absolute; right: 25%; top: 3100px"></text-analysis>
+
+          <point-element style="left: 70%; top: 3640px" position="3640" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 70%; top: 3710px" position="3710" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 70%; top: 3780px" position="3780" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+
+              <textanalysis-info style="position: absolute; left: 30%; top: 3850px"></textanalysis-info>
+
+          <point-element style="left: 30%; top: 4400px" position="4400" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 30%; top: 4470px" position="4470" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 30%; top: 4540px" position="4540" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+
+      <universal-tagmachine style="position: absolute; left: 16%; top: 4600px"></universal-tagmachine>
+
+          <point-element style="left: 40%; top: 5150px" position="5120" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 40%; top: 5220px" position="5220" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 40%; top: 5290px" position="5290" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+
+            <tagmachine-info style="position: absolute; left: 30%; top: 5350px"></tagmachine-info>
+
+          <point-element style="left: 49%; top: 5900px" position="5910" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 49%; top: 5970px" position="6010" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+          <point-element style="left: 49%; top: 6040px" position="6010" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+
+      <portfolio-end style="position: absolute; right: 10%; top: 6100px"></portfolio-end>
+
+          <point-element style="left: 40%; top: 6650px" position="6650" scroll="{{scrollPosition}}" height="{{windowHeight}}"></point-element>
+
+      <visitors-book style="position: absolute; left: 5%; top: 6700px"></portfolio-end>
+
+  </div>
+
+</template>
+
+<script>
+    Polymer('port-folio', {
+      windowWidth: document.body.clientWidth,
+      windowHeight: window.innerHeight,
+      scrollPosition: 0,
+      mainHeight: 6000,
+      scrollPerc: 0,
+      navItems: 5,
+      nDist: 0,
+      navPointPos: 0,
+      navSpacing0 : 0,
+      navSpacing1 : 0,
+      navSpacing2 : 0,
+      navSpacing3 : 0,
+      navSpacing4 : 0,
+      scrollHeight: 0,
+      col1: "#45B29D", col2: "#EFC94C", col3: "#E27A3F", col4: "#DF5A49", col5: "#334D5C",
+      scroll0: function () {
+        $("html, body").animate({ scrollTop: 0 }, 1000); },
+      scroll1: function () {
+        $("html, body").animate({ scrollTop: 1500 }, 1000); },
+      scroll2: function () {
+        $("html, body").animate({ scrollTop: 3000 }, 1000); },
+      scroll3: function () {
+        $("html, body").animate({ scrollTop: 4500 }, 1000); },
+      scroll4: function () {
+        $("html, body").animate({ scrollTop: 6000 }, 1000); },
+      ready: function () {
+        this.nDist = this.windowWidth / (this.navItems+1);
+        history.pushState(null, null, '#myhash');
+        this.navSpacing0 = this.nDist*1;
+        this.navSpacing1 = this.nDist*2;
+        this.navSpacing2 = this.nDist*3;
+        this.navSpacing3 = this.nDist*4;
+        this.navSpacing4 = this.nDist*5;
+        this.navPointPos = this.nDist - 12;
+        this.scrollPlusHeight = window.innerHeight + window.scrollY;
+        var self = this;
+        window.addEventListener('scroll', function (e) {
+          self.windowHeight = window.innerHeight;
+          self.nDist = self.windowWidth / (self.navItems+1);
+          self.scrollPosition = window.scrollY;
+          self.scrollPerc = self.scrollPosition / (self.mainHeight );
+          if (self.scrollPerc>1) {self.scrollPerc=1};
+          self.navPointPos = ( ( self.windowWidth-(self.nDist*2) ) * self.scrollPerc ) + self.nDist -12;
+          });
+        window.addEventListener('resize', function (e) {
+          self.windowWidth = document.body.clientWidth;
+          self.windowHeight = window.innerHeight;
+          self.scrollPosition = window.scrollY;
+          self.scrollPerc = self.scrollPosition / (self.mainHeight  );
+          if (self.scrollPerc>1) {self.scrollPerc=1};
+          self.nDist = document.body.clientWidth / (self.navItems+1);
+          self.navSpacing0 = self.nDist*1;
+          self.navSpacing1 = self.nDist*2;
+          self.navSpacing2 = self.nDist*3;
+          self.navSpacing3 = self.nDist*4;
+          self.navSpacing4 = self.nDist*5;
+          self.navPointPos = ( ( self.windowWidth-(self.nDist*2) ) * self.scrollPerc ) + self.nDist -12;
+          });
+      }
+    });
+</script>
+
+</polymer-element>

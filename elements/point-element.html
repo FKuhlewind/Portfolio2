@@ -1,0 +1,35 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="point-element" attributes="scroll height position">
+  
+<template>
+
+  <style type="text/css">
+    :host {
+      position: absolute; }
+    .point {
+      width: 20px;
+      height: 20px;
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 1px; }
+  </style>
+
+  <div style="background-color: rgba(0, 0, 0, {{opacity}})" class="point"></div>
+
+</template>
+
+<script>
+    Polymer('point-element', {
+      opacity: 1,
+      scrollChanged: function () {
+          this.trueheight = this.height - 90; 
+          this.goal = this.position - (this.height / 2) + 90;
+          this.diff = Math.abs(this.scroll-this.goal);
+          this.percent = (this.trueheight) - this.diff;
+          this.fin = 2- (this.trueheight / this.percent);
+          this.opacity = this.fin / 10 ;
+          },
+  });
+</script>
+
+</polymer-element>

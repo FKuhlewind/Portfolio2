@@ -1,0 +1,91 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+  <link rel="import" href="text-data.html"/>
+  <link rel="import" href="analysis-svg.html"/>
+
+<polymer-element name="text-analysis">
+
+<template>
+
+  <style type="text/css">
+    div {
+      font-family: "Trebuchet MS", sans-serif;
+      color: white; font-size: 16px }
+    .main {
+      width: 500px; 
+      padding: 10px;
+      border-radius: 1px;
+      background-color: rgba(0, 0, 0, 0.1); }
+    img {
+      float: right;
+      border-radius: 20px }
+    img:hover, select:hover {
+      background-color: rgba(0, 0, 0, 0.3); 
+      cursor: pointer;
+      cursor: hand; }
+    .header { 
+      font-size: 30px; 
+      margin-bottom: 10px }
+    select, option, textarea { 
+      width: 500px;
+      border: none; 
+      background: rgba(0, 0, 0, 0.2); 
+      color: white;
+      font-family: "Trebuchet MS", sans-serif; 
+      font-size: 16px; }
+  </style>
+
+<div class="main">
+
+  <img src="git.svg"/>
+
+  <div class="header">
+      &lttext-analysis>
+  </div>
+
+  <analysis-svg svgData="{{svgData}}"></analysis-svg>
+
+  <select id="chooseText" on-change="{{submitText}}">
+    <option value="{{text.number}}"  template repeat="{{text in textList}}" style="background: #A04B2F">
+      {{text.text}}
+    </option>
+  </select>
+
+  <text-data textData="{{textData}}" which="{{which}}"></text-data>
+
+</div>
+
+</template>
+
+<script>
+Polymer('text-analysis', {
+      textData: [],
+      submitText: function () {
+        this.which = this.$.chooseText.value;
+        },
+      textDataChanged: function () {
+        this.temp = 0;
+        for (var i = 0; i < 10; i++) {
+            if ( this.textData.keywords[i].sentiment.type == "neutral")
+                {this.temp = 0 } else
+                {this.temp = parseFloat(this.textData.keywords[i].sentiment.score)};
+            this.svgData[i]= { text: this.textData.keywords[i].text ,
+                            relevance: parseFloat(this.textData.keywords[i].relevance) ,
+                            sentimScore: this.temp};
+            };
+        },
+      ready: function() {
+        this.textList= [ {number: 0, text: "Anderson, Chris: The End of Theory, The Data Deluge Makes the Scientific Method Obsolete"},
+                         {number: 1, text: "Kittler, Friedrich: Code (or, How You Can Write Something Differently)."},
+                         {number: 2, text: "Sloterdijk, Peter: Rules for the Human Zoo"},
+                         {number: 3, text: "Vlusser, Vilem: The Future of Writing"}, 
+                         {number: 4, text: "Heidegger, Martin: The Age of the World Picture"}, 
+                         {number: 5, text: "Kittler, Friedrich: There is no Software"},
+                         {number: 6, text: "Kittler, Friedrich: The Perspective of Print"},
+                         ];
+        this.which = 0;
+        },
+});
+</script>
+
+</polymer-element>

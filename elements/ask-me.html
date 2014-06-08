@@ -1,68 +1,115 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/polymer-ajax/polymer-ajax.html">
-<link rel="import" href="../elements/show-picture.html"/>
-<link rel="import" href="../elements/chat-history.html"/>
+
+  <link rel="import" href="../elements/show-picture.html"/>
 
 <polymer-element name="ask-me">
   
+<template>
+
   <style type="text/css">
-      div {
-        float: left;
-        width: 300px;
-        height: 300px;
-      }
-      form {
-        width: 100%;
-      }
-      input {
-        width: 80%;
-      }
-      button {
-        width: 17%;
-      }
-      show-picture {
-        height: 300px;
-      }
+    div {
+      font-family: "Trebuchet MS", sans-serif;
+      color: white; font-size: 16px }
+    .main {
+      width: 520px; 
+      padding: 10px;
+      border-radius: 1px;
+      background-color: rgba(0, 0, 0, 0.1); }
+    img {
+      float: right;
+      border-radius: 20px }
+    img:hover {
+      background-color: rgba(0, 0, 0, 0.3); 
+      cursor: pointer;
+      cursor: hand; }
+    .header { 
+      font-size: 30px; 
+      margin-bottom: 10px }
+    .answer {
+      float: left;
+      width: 250px;
+      height: 250px;
+      overflow: auto;
+      background: transparent; }
+    form { 
+      width: 520px; 
+      margin-bottom: 10px;
+      color: white; }
+    input, select, textarea { 
+      width: 80%;  
+      background: rgba(0, 0, 0, 0.1);
+      border: 2px solid rgba(0, 0, 0, 0); 
+      color: white;
+      font-family: "Trebuchet MS", sans-serif; 
+      font-size: 16px; 
+      border-radius: 1px; }
+    textarea:focus, input:focus{
+      outline: 0; }
+    button { 
+      width: 17%; 
+      color: white;
+      border-radius: 1px; 
+      font-size: 16px; 
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.2); }
+    button:hover { 
+      border: 2px solid gray;
+      cursor: pointer;
+      cursor: hand; }
   </style>
 
-  <template>
-    <p class="elem">You can ask Florian anything you like, he knows the answer.</p>
+  <div class="main">
+    
+    <img src="git.svg"/>
 
+    <div class="header">
+      &ltask-florian>
+    </div>
+    
     <div>
-      <chat-history history="{{history}}"></chat-history>
       <form on-submit="{{ askquestion }}">
-        <input autocomplete="off" id="textInput" class="text" value="{{question}}" placeholder="Your question..."></input>
-        <button type="submit">Ask</button>
+        <input autocomplete="off" id="textInput" class="text" value="{{question}}" ></input>
+        <button style="background-color: {{buttonColor}}" type="submit">{{button}}</button>
       </form>
     </div>
 
-    <polymer-ajax url="{{apirequest}}" auto on-polymer-response="{{handleResponse}}" response="{{output}}" handleAs="json"></polymer-ajax>
+    <div class="answer">
+      <i>Question: {{remQuestion}} </i><br><br>
+      Florian: {{answer}}
+    </div>
+
     <show-picture picture="{{picture}}"></show-picture>
 
-    <br><br><p>Florian: {{answer}}</p>
+    <polymer-ajax url="{{apirequest}}" auto on-polymer-response="{{handleResponse}}" response="{{output}}" handleAs="json"></polymer-ajax>
 
-  </template>
+  </div>  
 
-  <script>
+</template>
+
+<script>
     Polymer('ask-me', {
-      myname: "Florian",
       answer: "...",
+      remQuestion: "",
+      button: "Ask",
+      buttonColor: "rgba(0, 0, 0, 0.2)",
       url: "https://ask.pannous.com/api?input=",
-      history: ["","","","","",""],
       askquestion: function(e) {
+          this.button = "Wait...";
+          this.buttonColor = "rgba(255, 0, 0, 0.3)";
           this.apirequest = this.url + this.question;
           e.preventDefault();     
           },
-      handleResponse: function() {        
-          this.answer = this.output.output[0].actions.say.text;         
-          this.history.push("You: "+this.question);
-          this.history.push("Florian: "+this.output.output[0].actions.say.text);
-          this.history.shift();
-          this.history.shift();
-          this.question = "";
-          this.picture = this.output.output[0].actions.show.images[0];
+      handleResponse: function() {
+          var self = this;  
+          this.remQuestion = this.question;    
+          this.answer = this.output.output[0].actions.say.text;
+          this.button = "Ask";     
+          this.buttonColor = "rgba(0, 0, 0, 0.1)";    
+          this.question = "";   
+          this.picture = this.output.output[0].actions.show.images[0]; 
           },
-    });
-  </script>
+  });
+</script>
 
 </polymer-element>

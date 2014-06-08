@@ -1,0 +1,66 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="portfolio-intro">
+
+<template>
+
+	<style type="text/css">
+      p {
+        margin: 10px 0 10px 0; 
+        font-size: 18px;}
+      :host {
+        width: 680px; 
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.1); 
+        font-family: "Trebuchet MS", sans-serif;
+        color: white;
+        border-radius: 1px;
+        font-size: 18px }
+      .top {
+        font-size: 30px; }
+      .by {
+        float: right;
+        font-size: 20px;
+        margin-top: 10px; }
+      a { 
+        color: #3E4E5B;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 18px; }
+	</style>
+
+<div class="main">
+
+  <div class="by">
+    by Florian Kuhlewind
+  </div>
+
+  <div class="top">
+    &ltport-folio>
+  </div>
+
+  <div class="theory">
+      <p>This is my second and last portfolio for the course <a href="" target="_blank">Art, Science and Technology</a> taken as part of my masters degree in General Linguistics at the University of Amsterdam. In this work I present the skills I have acquired during the course of the seminar while reflecting on how they could be put to use in the humanities.</p> 
+      <p>In my <a href="" target="_blank">first portfolio</a> I have put a focus on the technological side of coding and being overwhelmed by some of its possibilities, I tried to put as many aspects into practice as was possible for me at the time. With the present portfolio I tried to focus on how those technological skills can be put into practice in such a way that scholars in the humanities can benefit from them. With the sources available, I put a focus on applications that relate to the field of linguistics.</p>
+      <p>My aim was also to try a new approach towards design and usability. The website should be simple, appealing and easy to navigate. Its <a href="" target="_blank">components</a> aim to be self-explanatory and the overall design should support the content.</p>
+      <p>I hope that my plan succeeded and that you enjoy scrolling the rainbow!</p>
+  </div>
+
+</div>
+
+</template>	
+
+<script>
+Polymer('portfolio-intro', {  
+		button: "Coding",
+     	toggleInfo: function () {
+     		   this.$.collapseTheory.toggle();
+           this.$.collapseCoding.toggle();
+           if (this.button == "Coding")
+              {this.button = "Theory"}
+           else {this.button = "Coding"};
+     		},
+});
+</script>
+
+</polymer-element>
