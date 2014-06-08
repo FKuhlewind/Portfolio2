@@ -73,7 +73,8 @@ Polymer('analysis-svg', {
               {this.color = "rgba(0,"+Math.round(Math.abs(85*this.svgData[i].sentimScore+170))+", 0, 0.8)";
                 this.circleCol = "rgba(0,"+Math.round(Math.abs(85*this.svgData[i].sentimScore+170))+", 0, 0.3)"}
             else
-              {this.color = "rgba(0,0,0,0.2)"};
+              {this.color = "rgba(0,0,0,0.2)";
+               this.circleCol = "rgba(0,0,0,0.3)"; };
             this.graphData[i]= { text: this.svgData[i].text ,
                             width: this.width ,
                             xPos: ( (500 - this.width) / 2 ),
