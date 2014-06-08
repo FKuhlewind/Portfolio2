@@ -1,4 +1,6 @@
-Portfolio2
-==========
+Portfolio #2
+=============
 
-Portfolio #2 by Florian Kuhlewind
+These are the files for my second and final portfolio.
+
+
