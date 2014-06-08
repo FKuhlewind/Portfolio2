@@ -13,7 +13,12 @@ These are the files for my second and final portfolio.
         <ul>
           <li>portfolio-intro</li>
           <li>coding-element</li>
-          <li>ask-me</li>
+          <li>ask-me
+            <ul>
+              <li>polymer-ajax</li>
+              <li>show-picture</li>
+            </ul>
+          </li>
           <li>askme-info</li>
           <li>text-analysis</li>
           <li>textanalysis-info</li>
