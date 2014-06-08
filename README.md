@@ -4,9 +4,9 @@ Portfolio #2
 These are the files for my second and final portfolio:
 
 <ul>
-  <li>index.html</li>
+  <li><a href="" target="_blank">index.html</a></li>
   
-  <li>elements
+  <li><a href="" target="_blank">elements</a>
     <ul>
       <li>
         <a href="" target="_blank">port-folio</a>
