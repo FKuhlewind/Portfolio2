@@ -9,35 +9,35 @@ These are the files for my second and final portfolio:
   <li>elements
     <ul>
       <li>
-        <a href="https://github.com/FKuhlewind/Portfolio2/blob/gh-pages/elements/visitors-book.html"          target="_blank">port-folio</a>
+        <a href="" target="_blank">port-folio</a>
         <ul>
-          <li>portfolio-intro</li>
-          <li>coding-element</li>
-          <li>ask-me
+          <li><a href="" target="_blank">portfolio-intro</a></li>
+          <li><a href="" target="_blank">coding-element</a></li>
+          <li><a href="" target="_blank">ask-me</a>
             <ul>
-              <li>polymer-ajax</li>
-              <li>show-picture</li>
+              <li><a href="" target="_blank">polymer-ajax</a></li>
+              <li><a href="" target="_blank">show-picture</a></li>
             </ul>
           </li>
-          <li>askme-info
+          <li><a href="" target="_blank">askme-info</a>
             <ul>
-              <li>core-collapse</li>
+              <li><a href="" target="_blank">core-collapse</a></li>
             </ul>
           </li>
-          <li>text-analysis
+          <li><a href="" target="_blank">text-analysis</a>
             <ul>
-              <li>text-data</li>
-              <li>analysis-svg</li>
+              <li><a href="" target="_blank">text-data</a></li>
+              <li><a href="" target="_blank">analysis-svg</a></li>
             </ul>
           </li>
-          <li>textanalysis-info</li>
-          <li>universal-tagmachine
+          <li><a href="" target="_blank">textanalysis-info</a></li>
+          <li><a href="" target="_blank">universal-tagmachine</a>
             <ul>
-              <li>core-firebase</li>
-              <li>d3-cloud</li>
-              <li>picture-display
+              <li><a href="" target="_blank">core-firebase</a></li>
+              <li><a href="" target="_blank">d3-cloud</a></li>
+              <li><a href="" target="_blank">picture-display</a>
                 <ul>
-                  <li>picture-slider</li>
+                  <li><a href="" target="_blank">picture-slider</a></li>
                 </ul>
               </li>
             </ul>
