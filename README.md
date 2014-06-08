@@ -42,15 +42,15 @@ These are the files for my second and final portfolio:
               </li>
             </ul>
           </li>
-          <li>tagmachine-info</li>
-          <li>portfolio-end.html</li>
-          <li>visitors-book
+          <li><a href="" target="_blank">tagmachine-info</a></li>
+          <li><a href="" target="_blank">portfolio-end.html</a></li>
+          <li><a href="" target="_blank">visitors-book</a>
             <ul>
-              <li>core-firebase</li>
+              <li><a href="" target="_blank">core-firebase</a></li>
             </ul>
           </li>
-          <li>point-element</li>
-          <li>point-link</li>
+          <li><a href="" target="_blank">point-element</a></li>
+          <li><a href="" target="_blank">point-link</a></li>
         </ul>
       </li>
     </ul>
