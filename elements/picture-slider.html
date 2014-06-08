@@ -36,6 +36,8 @@
       	   right: 35px;
       	   word-wrap: break-word;
       	   padding: 5px; }
+      	span {
+      	   float: right; }
    </style>
 
   <div>
@@ -43,7 +45,7 @@
   </div>
 
   <div class="url">
-  	{{picture}} ({{numb}}/{{amount}})
+  	{{picture}} <span>[{{numb}}/{{amount}}]</span>
   </div>
 
   <template if="{{showButton}}">
