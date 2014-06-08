@@ -24,12 +24,31 @@ These are the files for my second and final portfolio.
               <li>core-collapse</li>
             </ul>
           </li>
-          <li>text-analysis</li>
+          <li>text-analysis
+            <ul>
+              <li>text-data</li>
+              <li>analysis-svg</li>
+            </ul>
+          </li>
           <li>textanalysis-info</li>
-          <li>universal-tagmachine</li>
+          <li>universal-tagmachine
+            <ul>
+              <li>core-firebase</li>
+              <li>d3-cloud</li>
+              <li>picture-display
+                <ul>
+                  <li>picture-slider</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
           <li>tagmachine-info</li>
           <li>portfolio-end.html</li>
-          <li>visitors-book</li>
+          <li>visitors-book
+            <ul>
+              <li>core-firebase</li>
+            </ul>
+          </li>
           <li>point-element</li>
           <li>point-link</li>
           
