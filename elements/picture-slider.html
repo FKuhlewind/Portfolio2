@@ -43,7 +43,7 @@
   </div>
 
   <div class="url">
-  	{{picture}}
+  	{{picture}} ({{this.which}}/{{this.amount}})
   </div>
 
   <template if="{{showButton}}">
@@ -57,6 +57,7 @@ Polymer('picture-slider', {
 		which: 0,
      	slideDataChanged: function () {
      		this.which = 0;
+     		this.numb = this.which + 1;
      		this.amount = this.slideData.length;
      		if (this.amount > 1) {
      			this.showButton = true
@@ -72,6 +73,7 @@ Polymer('picture-slider', {
      			this.which = this.which - this.amount;
      			}; 
      		this.picture = this.slideData[this.which];
+     		this.numb = this.which + 1;
      		},
 });
 </script>
